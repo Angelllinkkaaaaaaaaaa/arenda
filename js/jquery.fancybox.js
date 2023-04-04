@@ -1,14 +1,4 @@
-/*!
- * fancyBox - jQuery Plugin
- * version: 2.1.5 (Fri, 14 Jun 2013)
- * @requires jQuery v1.6 or later
- *
- * Examples at http://fancyapps.com/fancybox/
- * License: www.fancyapps.com/fancybox/#license
- *
- * Copyright 2012 Janis Skarnelis - janis@fancyapps.com
- *
- */
+
 
 (function (window, document, $, undefined) {
 	"use strict";
@@ -49,7 +39,7 @@
 		};
 
 	$.extend(F, {
-		// The current version of fancyBox
+		
 		version: '2.1.5',
 
 		defaults: {
@@ -62,7 +52,7 @@
 			minHeight : 100,
 			maxWidth  : 9999,
 			maxHeight : 9999,
-			pixelRatio: 1, // Set to 2 for retina display support
+			pixelRatio: 1, 
 
 			autoSize   : true,
 			autoHeight : false,
@@ -75,7 +65,7 @@
 			topRatio    : 0.5,
 			leftRatio   : 0.5,
 
-			scrolling : 'auto', // 'auto', 'yes' or 'no'
+			scrolling : 'auto', 
 			wrapCSS   : '',
 
 			arrows     : true,
@@ -105,20 +95,20 @@
 
 			keys  : {
 				next : {
-					13 : 'left', // enter
-					34 : 'up',   // page down
-					39 : 'left', // right arrow
-					40 : 'up'    // down arrow
+					13 : 'left', 
+					34 : 'up',   
+					39 : 'left', 
+					40 : 'up'   
 				},
 				prev : {
-					8  : 'right',  // backspace
-					33 : 'down',   // page up
-					37 : 'right',  // left arrow
-					38 : 'down'    // up arrow
+					8  : 'right',  
+					33 : 'down',   
+					37 : 'right',  
+					38 : 'down'    
 				},
-				close  : [27], // escape key
-				play   : [32], // space - start/stop slideshow
-				toggle : [70]  // letter "f" - toggle fullscreen
+				close  : [27], 
+				play   : [32], 
+				toggle : [70]  
 			},
 
 			direction : {
@@ -128,14 +118,14 @@
 
 			scrollOutside  : true,
 
-			// Override some properties
+			
 			index   : 0,
 			type    : null,
 			href    : null,
 			content : null,
 			title   : null,
 
-			// HTML templates
+			
 			tpl: {
 				wrap     : '<div class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>',
 				image    : '<img class="fancybox-image" src="{href}" alt="" />',
@@ -146,59 +136,59 @@
 				prev     : '<a title="Назад" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
 			},
 
-			// Properties for each animation type
-			// Opening fancyBox
-			openEffect  : 'fade', // 'elastic', 'fade' or 'none'
+			
+			
+			openEffect  : 'fade', 
 			openSpeed   : 250,
 			openEasing  : 'swing',
 			openOpacity : true,
 			openMethod  : 'zoomIn',
 
-			// Closing fancyBox
-			closeEffect  : 'fade', // 'elastic', 'fade' or 'none'
+			
+			closeEffect  : 'fade', 
 			closeSpeed   : 250,
 			closeEasing  : 'swing',
 			closeOpacity : true,
 			closeMethod  : 'zoomOut',
 
-			// Changing next gallery item
-			nextEffect : 'elastic', // 'elastic', 'fade' or 'none'
+			
+			nextEffect : 'elastic', 
 			nextSpeed  : 250,
 			nextEasing : 'swing',
 			nextMethod : 'changeIn',
 
-			// Changing previous gallery item
-			prevEffect : 'elastic', // 'elastic', 'fade' or 'none'
+			
+			prevEffect : 'elastic', 
 			prevSpeed  : 250,
 			prevEasing : 'swing',
 			prevMethod : 'changeOut',
 
-			// Enable default helpers
+			
 			helpers : {
 				overlay : true,
 				title   : true
 			},
 
-			// Callbacks
-			onCancel     : $.noop, // If canceling
-			beforeLoad   : $.noop, // Before loading
-			afterLoad    : $.noop, // After loading
-			beforeShow   : $.noop, // Before changing in current item
-			afterShow    : $.noop, // After opening
-			beforeChange : $.noop, // Before changing gallery item
-			beforeClose  : $.noop, // Before closing
-			afterClose   : $.noop  // After closing
+			
+			onCancel     : $.noop, 
+			beforeLoad   : $.noop, 
+			afterLoad    : $.noop, 
+			beforeShow   : $.noop, 
+			afterShow    : $.noop, 
+			beforeChange : $.noop, 
+			beforeClose  : $.noop, 
+			afterClose   : $.noop  
 		},
 
-		//Current state
-		group    : {}, // Selected group
-		opts     : {}, // Group options
-		previous : null,  // Previous element
-		coming   : null,  // Element being loaded
-		current  : null,  // Currently loaded element
-		isActive : false, // Is activated
-		isOpen   : false, // Is currently open
-		isOpened : false, // Have been fully opened at least once
+		
+		group    : {}, 
+		opts     : {}, 
+		previous : null,  
+		coming   : null,  
+		current  : null,  
+		isActive : false, 
+		isOpen   : false, 
+		isOpened : false, 
 
 		wrap  : null,
 		skin  : null,
@@ -210,17 +200,15 @@
 			isActive : false
 		},
 
-		// Loaders
+		
 		ajaxLoad   : null,
 		imgPreload : null,
 
-		// Some collections
+		
 		transitions : {},
 		helpers     : {},
 
-		/*
-		 *	Static methods
-		 */
+		
 
 		open: function (group, opts) {
 			if (!group) {
@@ -231,17 +219,17 @@
 				opts = {};
 			}
 
-			// Close if already active
+		
 			if (false === F.close(true)) {
 				return;
 			}
 
-			// Normalize group
+		
 			if (!$.isArray(group)) {
 				group = isQuery(group) ? $(group).get() : [group];
 			}
 
-			// Recheck if the type of each element is `object` and set content type (image, ajax, etc)
+			
 			$.each(group, function(i, element) {
 				var obj = {},
 					href,
@@ -253,7 +241,7 @@
 					selector;
 
 				if ($.type(element) === "object") {
-					// Check if is DOM element
+					
 					if (element.nodeType) {
 						element = $(element);
 					}
@@ -291,7 +279,7 @@
 				}
 
 				if (isString(href)) {
-					// Try to guess the content type
+					
 					if (!type) {
 						if (F.isImage(href)) {
 							type = 'image';
@@ -308,8 +296,8 @@
 						}
 					}
 
-					// Split url into two pieces with source url and content selector, e.g,
-					// "/mypage.html #my_id" will load "/mypage.html" and display element having id "my_id"
+					
+					
 					if (type === 'ajax') {
 						hrefParts = href.split(/\s+/, 2);
 						href      = hrefParts.shift();
@@ -346,10 +334,10 @@
 				group[ i ] = obj;
 			});
 
-			// Extend the defaults
+			
 			F.opts = $.extend(true, {}, F.defaults, opts);
 
-			// All options are merged recursive except keys
+			
 			if (opts.keys !== undefined) {
 				F.opts.keys = opts.keys ? $.extend({}, F.defaults.keys, opts.keys) : false;
 			}
@@ -359,7 +347,7 @@
 			return F._start(F.opts.index);
 		},
 
-		// Cancel image loading or abort ajax request
+		
 		cancel: function () {
 			var coming = F.coming;
 
@@ -385,13 +373,12 @@
 
 			F.coming = null;
 
-			// If the first item has been canceled, then clear everything
 			if (!F.current) {
 				F._afterZoomOut( coming );
 			}
 		},
 
-		// Start closing animation if is open; remove immediately if opening/closing
+		
 		close: function (event) {
 			F.cancel();
 
@@ -422,10 +409,7 @@
 			}
 		},
 
-		// Manage slideshow:
-		//   $.fancybox.play(); - toggle slideshow
-		//   $.fancybox.play( true ); - start
-		//   $.fancybox.play( false ); - stop
+		
 		play: function ( action ) {
 			var clear = function () {
 					clearTimeout(F.player.timer);
@@ -469,7 +453,7 @@
 			}
 		},
 
-		// Navigate to next gallery item
+		
 		next: function ( direction ) {
 			var current = F.current;
 
@@ -482,7 +466,7 @@
 			}
 		},
 
-		// Navigate to previous gallery item
+		
 		prev: function ( direction ) {
 			var current = F.current;
 
@@ -495,7 +479,7 @@
 			}
 		},
 
-		// Navigate to gallery item by index
+		
 		jumpto: function ( index, direction, router ) {
 			var current = F.current;
 
@@ -523,7 +507,7 @@
 			}
 		},
 
-		// Center inside viewport and toggle position type to fixed or absolute if needed
+		
 		reposition: function (e, onlyAbsolute) {
 			var current = F.current,
 				wrap    = current ? current.wrap : null,
@@ -583,12 +567,12 @@
 			}, (anyway && !isTouch ? 0 : 300));
 		},
 
-		// Shrink content to fit inside viewport or restore if resized
+		
 		toggle: function ( action ) {
 			if (F.isOpen) {
 				F.current.fitToView = $.type(action) === "boolean" ? action : !F.current.fitToView;
 
-				// Help browser to restore document dimensions
+				
 				if (isTouch) {
 					F.wrap.removeAttr('style').addClass('fancybox-tmp');
 
@@ -612,7 +596,7 @@
 
 			el = $('<div id="fancybox-loading"><div></div></div>').click(F.cancel).appendTo('body');
 
-			// If user will press the escape-button, the request will be canceled
+			
 			D.bind('keydown.loading', function(e) {
 				if ((e.which || e.keyCode) === 27) {
 					e.preventDefault();
@@ -644,7 +628,7 @@
 				rez.h = locked[0].clientHeight;
 
 			} else {
-				// See http://bugs.jquery.com/ticket/6724
+				
 				rez.w = isTouch && window.innerWidth  ? window.innerWidth  : W.width();
 				rez.h = isTouch && window.innerHeight ? window.innerHeight : W.height();
 			}
@@ -652,7 +636,7 @@
 			return rez;
 		},
 
-		// Unbind the keyboard / clicking actions
+		
 		unbindEvents: function () {
 			if (F.wrap && isQuery(F.wrap)) {
 				F.wrap.unbind('.fb');
@@ -670,8 +654,7 @@
 				return;
 			}
 
-			// Changing document height on iOS devices triggers a 'resize' event,
-			// that can change document height... repeating infinitely
+			
 			W.bind('orientationchange.fb' + (isTouch ? '' : ' resize.fb') + (current.autoCenter && !current.locked ? ' scroll.fb' : ''), F.update);
 
 			keys = current.keys;
@@ -681,12 +664,12 @@
 					var code   = e.which || e.keyCode,
 						target = e.target || e.srcElement;
 
-					// Skip esc key if loading, because showLoading will cancel preloading
+					
 					if (code === 27 && F.coming) {
 						return false;
 					}
 
-					// Ignore key combinations and key events within form elements
+					
 					if (!e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey && !(target && (target.type || $(target).is('[contenteditable]')))) {
 						$.each(keys, function(i, val) {
 							if (current.group.length > 1 && val[ code ] !== undefined) {
@@ -789,7 +772,7 @@
 
 			coming = $.extend(true, {}, F.opts, obj);
 
-			// Convert margin and padding properties to array - top, right, bottom, left
+			
 			margin  = coming.margin;
 			padding = coming.padding;
 
@@ -801,7 +784,7 @@
 				coming.padding = [padding, padding, padding, padding];
 			}
 
-			// 'modal' propery is just a shortcut
+			
 			if (coming.modal) {
 				$.extend(true, coming, {
 					closeBtn   : false,
@@ -818,7 +801,7 @@
 				});
 			}
 
-			// 'autoSize' property is a shortcut, too
+			
 			if (coming.autoSize) {
 				coming.autoWidth = coming.autoHeight = true;
 			}
@@ -831,17 +814,11 @@
 				coming.autoHeight = true;
 			}
 
-			/*
-			 * Add reference to the group, so it`s possible to access from callbacks, example:
-			 * afterLoad : function() {
-			 *     this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
-			 * }
-			 */
+			
 
 			coming.group  = F.group;
 			coming.index  = index;
 
-			// Give a chance for callback or helpers to update coming item (type, title, etc)
 			F.coming = coming;
 
 			if (false === F.trigger('beforeLoad')) {
@@ -856,7 +833,7 @@
 			if (!type) {
 				F.coming = null;
 
-				//If we can not determine content type then drop silently or display next/prev item if looping through gallery
+				
 				if (F.current && F.router && F.router !== 'jumpto') {
 					F.current.index = index;
 
@@ -881,7 +858,7 @@
 				coming.scrolling = 'scroll';
 			}
 
-			// Build the neccessary markup
+			
 			coming.wrap = $(coming.tpl.wrap).addClass('fancybox-' + (isTouch ? 'mobile' : 'desktop') + ' fancybox-type-' + type + ' fancybox-tmp ' + coming.wrapCSS).appendTo( coming.parent || 'body' );
 
 			$.extend(coming, {
@@ -896,7 +873,7 @@
 
 			F.trigger('onReady');
 
-			// Check before try to load; 'inline' and 'html' types need content, others - href
+			
 			if (type === 'inline' || type === 'html') {
 				if (!coming.content || !coming.content.length) {
 					return F._error( 'content' );
@@ -936,7 +913,7 @@
 		},
 
 		_loadImage: function () {
-			// Reset preload image so it is later possible to check "complete" property
+			
 			var img = F.imgPreload = new Image();
 
 			img.onload = function () {
@@ -992,7 +969,7 @@
 					.attr('scrolling', isTouch ? 'auto' : coming.iframe.scrolling)
 					.attr('src', coming.href);
 
-			// This helps IE
+			
 			$(coming.wrap).bind('onReset', function () {
 				try {
 					$(this).find('iframe').hide().attr('src', '//about:blank').end().empty();
@@ -1005,14 +982,12 @@
 				iframe.one('load', function() {
 					$(this).data('ready', 1);
 
-					// iOS will lose scrolling if we resize
+					
 					if (!isTouch) {
 						$(this).bind('load.fb', F.update);
 					}
 
-					// Without this trick:
-					//   - iframe won't scroll on iOS devices
-					//   - IE7 sometimes displays empty iframe
+
 					$(this).parents('.fancybox-wrap').width('100%').removeClass('fancybox-tmp').show();
 
 					F._afterLoad();
@@ -1137,13 +1112,10 @@
 				current.inner.append( content );
 			}
 
-			// Give a chance for helpers or callbacks to update elements
 			F.trigger('beforeShow');
 
-			// Set scrolling before calculating dimensions
 			current.inner.css('overflow', scrolling === 'yes' ? 'scroll' : (scrolling === 'no' ? 'hidden' : scrolling));
 
-			// Set initial dimensions and start position
 			F._setDimension();
 
 			F.reposition();
@@ -1201,13 +1173,11 @@
 				iframe,
 				body;
 
-			// Reset dimensions so we could re-check actual size
 			wrap.add(skin).add(inner).width('auto').height('auto').removeClass('fancybox-tmp');
 
 			wPadding = getScalar(skin.outerWidth(true)  - skin.width());
 			hPadding = getScalar(skin.outerHeight(true) - skin.height());
 
-			// Any space between content and viewport (margin, padding, border, title)
 			wSpace = wMargin + wPadding;
 			hSpace = hMargin + hPadding;
 
@@ -1237,7 +1207,6 @@
 			} else if (current.autoWidth || current.autoHeight) {
 				inner.addClass( 'fancybox-tmp' );
 
-				// Set width or height in case we need to calculate only one dimension
 				if (!current.autoWidth) {
 					inner.width( origWidth );
 				}
@@ -1262,14 +1231,14 @@
 
 			ratio  = origWidth / origHeight;
 
-			// Calculations for the content
+			
 			minWidth  = getScalar(isPercentage(minWidth) ? getScalar(minWidth, 'w') - wSpace : minWidth);
 			maxWidth  = getScalar(isPercentage(maxWidth) ? getScalar(maxWidth, 'w') - wSpace : maxWidth);
 
 			minHeight = getScalar(isPercentage(minHeight) ? getScalar(minHeight, 'h') - hSpace : minHeight);
 			maxHeight = getScalar(isPercentage(maxHeight) ? getScalar(maxHeight, 'h') - hSpace : maxHeight);
 
-			// These will be used to determine if wrap can fit in the viewport
+			
 			origMaxWidth  = maxWidth;
 			origMaxHeight = maxHeight;
 
@@ -1314,13 +1283,13 @@
 				height = Math.max(minHeight, Math.min(height, maxHeight));
 			}
 
-			// Try to fit inside viewport (including the title)
+			
 			if (current.fitToView) {
 				inner.width( width ).height( height );
 
 				wrap.width( width + wPadding );
 
-				// Real wrap dimensions
+				
 				width_  = wrap.width();
 				height_ = wrap.height();
 
@@ -1430,7 +1399,7 @@
 
 			F.update();
 
-			// Assign a click event
+			
 			if ( current.closeClick || (current.nextClick && F.group.length > 1) ) {
 				F.inner.css('cursor', 'pointer').bind('click.fb', function(e) {
 					if (!$(e.target).is('a') && !$(e.target).parent().is('a')) {
@@ -1441,7 +1410,7 @@
 				});
 			}
 
-			// Create a close button
+			
 			if (current.closeBtn) {
 				$(current.tpl.closeBtn).appendTo(F.skin).bind('click.fb', function(e) {
 					e.preventDefault();
@@ -1450,7 +1419,7 @@
 				});
 			}
 
-			// Create navigation arrows
+			
 			if (current.arrows && F.group.length > 1) {
 				if (current.loop || current.index > 0) {
 					$(current.tpl.prev).appendTo(F.outer).bind('click.fb', F.prev);
@@ -1463,7 +1432,7 @@
 
 			F.trigger('afterShow');
 
-			// Stop the slideshow if this is the last item
+			
 			if (!current.loop && current.index === current.group.length - 1) {
 				F.play( false );
 
@@ -1498,9 +1467,7 @@
 		}
 	});
 
-	/*
-	 *	Default transitions
-	 */
+	
 
 	F.transitions = {
 		getOrigPosition: function () {
@@ -1581,7 +1548,7 @@
 				elastic  = effect === 'elastic',
 				endPos   = $.extend({opacity : 1}, startPos);
 
-			// Remove "position" property that breaks older IE
+			
 			delete endPos.position;
 
 			if (elastic) {
@@ -1649,7 +1616,7 @@
 				}
 			}
 
-			// Workaround for http://bugs.jquery.com/ticket/12273
+			
 			if (effect === 'none') {
 				F._afterZoomIn();
 
@@ -1683,25 +1650,22 @@
 		}
 	};
 
-	/*
-	 *	Overlay helper
-	 */
-
+	
 	F.helpers.overlay = {
 		defaults : {
-			closeClick : true,      // if true, fancyBox will be closed when user clicks on the overlay
-			speedOut   : 200,       // duration of fadeOut animation
-			showEarly  : true,      // indicates if should be opened immediately or wait until the content is ready
-			css        : {},        // custom CSS properties
-			locked     : !isTouch,  // if true, the content will be locked into overlay
-			fixed      : true       // if false, the overlay CSS position property will not be set to "fixed"
+			closeClick : true,      
+			speedOut   : 200,       
+			showEarly  : true,      
+			css        : {},        
+			locked     : !isTouch,  
+			fixed      : true       
 		},
 
-		overlay : null,      // current handle
-		fixed   : false,     // indicates if the overlay has position "fixed"
-		el      : $('html'), // element that contains "the lock"
+		overlay : null,      
+		fixed   : false,     
+		el      : $('html'), 
 
-		// Public methods
+		
 		create : function(opts) {
 			opts = $.extend({}, this.defaults, opts);
 
@@ -1778,15 +1742,13 @@
 			});
 		},
 
-		// Private, callbacks
 
 		update : function () {
 			var width = '100%', offsetWidth;
 
-			// Reset width/height so it will not mess
+		
 			this.overlay.width(width).height('100%');
 
-			// jQuery does not return reliable result for IE
 			if (IE) {
 				offsetWidth = Math.max(document.documentElement.offsetWidth, document.body.offsetWidth);
 
@@ -1801,7 +1763,7 @@
 			this.overlay.width(width).height(D.height());
 		},
 
-		// This is where we can manipulate DOM, because later it would cause iframes to reload
+	
 		onReady : function (opts, obj) {
 			var overlay = this.overlay;
 
@@ -1855,23 +1817,19 @@
 		},
 
 		afterClose: function (opts) {
-			// Remove overlay if exists and fancyBox is not opening
-			// (e.g., it is not being open using afterClose callback)
-			//if (this.overlay && !F.isActive) {
+			
 			if (this.overlay && !F.coming) {
 				this.overlay.fadeOut(opts.speedOut, $.proxy( this.close, this ));
 			}
 		}
 	};
 
-	/*
-	 *	Title helper
-	 */
+	
 
 	F.helpers.title = {
 		defaults : {
-			type     : 'float', // 'float', 'inside', 'outside' or 'over',
-			position : 'bottom' // 'top' or 'bottom'
+			type     : 'float', 
+			position : 'bottom' 
 		},
 
 		beforeShow: function (opts) {
@@ -1904,7 +1862,7 @@
 					target = F.inner;
 				break;
 
-				default: // 'float'
+				default: 
 					target = F.skin;
 
 					title.appendTo('body');
@@ -1915,7 +1873,7 @@
 
 					title.wrapInner('<span class="child"></span>');
 
-					//Increase bottom margin so this title will also fit into viewport
+					
 					F.current.margin[2] += Math.abs( getScalar(title.css('margin-bottom')) );
 				break;
 			}
@@ -1924,7 +1882,7 @@
 		}
 	};
 
-	// jQuery plugin initialization
+	
 	$.fn.fancybox = function (options) {
 		var index,
 			that     = $(this),
@@ -1949,7 +1907,7 @@
 
 					options.index = idx;
 
-					// Stop an event from bubbling if everything is fine
+					
 					if (F.open(what, options) !== false) {
 						e.preventDefault();
 					}
@@ -1971,12 +1929,12 @@
 		return this;
 	};
 
-	// Tests that need a body at doc ready
+	
 	D.ready(function() {
 		var w1, w2;
 
 		if ( $.scrollbarWidth === undefined ) {
-			// http://benalman.com/projects/jquery-misc-plugins/#scrollbarwidth
+	
 			$.scrollbarWidth = function() {
 				var parent = $('<div style="width:50px;height:50px;overflow:auto"><div/></div>').appendTo('body'),
 					child  = parent.children(),
@@ -2005,7 +1963,7 @@
 			parent : $('body')
 		});
 
-		//Get real width of page scroll-bar
+		
 		w1 = $(window).width();
 
 		H.addClass('fancybox-lock-test');
