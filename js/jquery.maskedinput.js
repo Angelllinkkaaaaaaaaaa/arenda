@@ -14,7 +14,7 @@ var pasteEventName = getPasteEvent() + ".mask",
 	caretTimeoutId;
 
 $.mask = {
-	
+	//Predefined character definitions
 	definitions: {
 		'9': "[0-9]",
 		'a': "[A-Za-z]",
@@ -25,7 +25,7 @@ $.mask = {
 };
 
 $.fn.extend({
-	
+	//Helper Function for Caret positioning
 	caret: function(begin, end) {
 		var range;
 
@@ -74,7 +74,7 @@ $.fn.extend({
 			return input.data($.mask.dataName)();
 		}
 		settings = $.extend({
-			placeholder: $.mask.placeholder, 
+			placeholder: $.mask.placeholder, // Load default placeholder
 			completed: null
 		}, settings);
 
